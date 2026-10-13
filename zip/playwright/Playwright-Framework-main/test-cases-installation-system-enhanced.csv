@@ -1,0 +1,75 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-INST-001,Auth - Unauthenticated Redirect,P0,None,Not logged in,"1. Navigate to /installation-system
+2. Wait for load","Redirected to /login. Sign In form visible."
+TC-INST-002,Page Load - All Sections,P0,Engineering,Logged in as engineering,"1. Navigate to /installation-system
+2. Verify URL
+3. Observe all h3 headings","URL: /installation-system. h3 headings: Filter functions, Select solutions you want to compare, Comparison list, Enter your application parameters. h4: Applications. All 5 category cards visible."
+TC-INST-003,Page Load - Header Elements,P1,Engineering,On installation-system,"1. Observe header bar
+2. Check brand links, region selector, user menu","Header shows: System Selector & Configurator text, Region (North America default), User menu (David Wilson/Engineering). Brand links: pemnet, profil-global, haeger, autoriv, sherex."
+TC-INST-004,Filter Defaults - Chips,P0,Engineering,On installation-system,"1. Observe filter chips below matching count","Chips: Region: NA, Element types: none selected, Max thread: Any, Force: Any, Compare selected: 0. Matching count positive."
+TC-INST-005,Element Type - PEM,P1,Engineering,On installation-system,"1. Record initial count
+2. Click PEM button
+3. Observe changes","PEM active. Count decreases. Chip: Element types: PEM."
+TC-INST-006,Element Type - SHEREX,P1,Engineering,"","Click SHEREX","SHEREX active. Count decreases."
+TC-INST-007,Element Type - PROFIL,P1,Engineering,"","Click PROFIL","PROFIL active. Count decreases."
+TC-INST-008,Element Type - Other Fasteners,P1,Engineering,"","Click Other fasteners","Other fasteners active. Count decreases."
+TC-INST-009,Element Type - Multi-Select (PEM+SHEREX),P1,Engineering,"","1. Click PEM, 2. Click SHEREX
+3. Observe count","Both active. Union count. Chips show both."
+TC-INST-010,Element Type - All Four Selected,P2,Engineering,"","1. Select PEM, SHEREX, PROFIL, Other fasteners","All 4 active. Count = union of all."
+TC-INST-011,Element Type - Toggle Off,P2,Engineering,PEM selected,"1. Click PEM again to deselect","PEM inactive. Count reverts. Chip updates."
+TC-INST-012,Capability - Process Monitoring,P1,Engineering,"","1. Check Process monitoring required","Count decreases. Only solutions with process monitoring."
+TC-INST-013,Capability - Process Monitoring Uncheck,P2,Engineering,Checked,"1. Uncheck Process monitoring","Count reverts. Checkbox unchecked."
+TC-INST-014,Capability - Robot Integration,P1,Engineering,"","1. Check Robot integration required","Count decreases. Only robot-capable solutions."
+TC-INST-015,Capability - Both Checked,P2,Engineering,"","1. Check both checkboxes","Count = intersection (both capabilities). Less than each individually."
+TC-INST-016,Force Range - Min Value,P1,Engineering,"","1. Set Minimum (kN) to 50","Count changes. Force chip updates."
+TC-INST-017,Force Range - Max Value,P1,Engineering,"","1. Set Maximum (kN) to 100","Count changes. Force chip updates."
+TC-INST-018,Force Range - Min > Max Validation,P2,Engineering,"","1. Set Min=200, Max=50","Either: auto-correct, validation error, or zero results. No crash."
+TC-INST-019,Force Range - Full Range (21-300),P2,Engineering,"","1. Set Min=21, Max=300","Maximum count (all solutions in range)."
+TC-INST-020,Force Range - Narrow Range,P2,Engineering,"","1. Set Min=100, Max=110","Only solutions in 100-110 kN shown."
+TC-INST-021,Force Range - Reset/Any,P2,Engineering,Force range set,"1. Click Reset or Any link","Resets to default (Any). Count returns."
+TC-INST-022,Reset All Filters,P1,Engineering,Multiple filters applied,"1. Click Reset filters button","All filters reset. Count returns to original. Chips reset."
+TC-INST-023,Solution Selection - A210,P0,Engineering,"","1. Check A210 checkbox","Checked. Compare selected: 1. id=solution-A210."
+TC-INST-024,Solution Selection - All 5 Categories,P1,Engineering,"","1. Check A210, 824 eDrive, A240-CP, MDS A100, Full Custom Solution","All 5 checked. Compare selected: 5."
+TC-INST-025,Solution Selection - Deselect,P1,Engineering,One selected,"1. Uncheck the solution","Compare selected: 0. Empty state returns."
+TC-INST-026,Solution Selection - All 47 Checkboxes Exist,P2,Engineering,"","1. Verify all solution checkboxes are present","47 checkboxes across 13 subcategories: Handtools(15), Standalone Machines(13), Robotic Integration(13), InDie(3), Custom(3). Each has unique id=""solution-{Name}""."
+TC-INST-027,Comparison - Empty State,P2,Engineering,No solutions,"1. Scroll to Comparison list","Shows: ""No solutions selected yet. Check solutions above to compare them here."""
+TC-INST-028,Comparison - Compare/Configure Button,P1,Engineering,1+ solutions selected,"1. Check A210
+2. Click Compare / Configure Solutions{count} button","Button text shows count. Comparison cards appear. Card shows solution name, category, subcategory."
+TC-INST-029,Comparison - Card Details,P1,Engineering,Comparison cards visible,"1. Observe A210 comparison card","Card shows: A210, Handtools · Pneumo Hydraulic Handtools, TOTAL INSTALLATION COST PER PART: —, OPERATOR UTILIZATION: —, MACHINE UTILIZATION: —, Key Characteristics (expandable), Configure Solution button, Machine cost allocation (100% utilization/Dedicated), Download Cost Analysis, Generate ROI Report."
+TC-INST-030,Comparison - Key Characteristics Expandable,P2,Engineering,Comparison card visible,"1. Click Key Characteristics expand/collapse","Expands to show product features. Collapses back."
+TC-INST-031,Comparison - Configure Solution Opens Panel,P1,Engineering,Comparison A210 card visible,"1. Click Configure Solution on A210 card","Configuration panel opens as overlay. Shows A210 options, 3 dropdown filters, Machine/Options/Custom Tooling sections, Configuration summary."
+TC-INST-032,Comparison - Download Cost Analysis Button,P2,Engineering,Comparison card visible,"1. Click Download Cost Analysis","Download initiates or button is clickable."
+TC-INST-033,Comparison - Generate ROI Report Button,P2,Engineering,Comparison card visible,"1. Click Generate ROI Report","ROI report generation starts or button clickable."
+TC-INST-034,Comparison - Machine Cost Allocation Section,P2,Engineering,Comparison card visible,"1. Observe Machine cost allocation","Shows: ""100% utilization"" and ""Dedicated to this application"" options."
+TC-INST-035,Solution Name - All 47 Solutions Listed,P3,Engineering,"","1. Verify each solution name in grid","Solutions: A210, FLEX-18, FLEX-5S Pull to Stroke, FLEX-5P Pull to Pressure, RIV949 Inline, RIV943 Rivet, SSG 800 Pistol Style Series, SSG 910 Inline Right Angle, SSG 900 Inline Style Series, PEMSERTER® Series P3, DLHT Double Lever Hand Tool, RNHT, DRHT Double Ratchet Hand Tool, LHF 202 Hand Tool, PEMSERTER® Micro-Mate® Hand Tool, 824 eDrive, T-Series, 824 MSPe, 824 One Touch, 618 MSPe, 824 Window Touch, 824 One Touch Lite, 618 Pro, A220-CP, A220-BI, A220-Spin-Pull, A220-NMS, PEMSERTER® Series 4®, A240-CP, A240-BI, A240-NMS, A240-CU, A240-BI-R, A240-SAS, A230-BI, A230-CP, A230-BI-R, A230-SAS, 824 MSPe RobotReady, 618 MSPe RobotReady, 824 One Touch RobotReady, MDS A100, PROFIL InDie, PEMSerter InDie, Full Custom Solution, A260-CNC, A250-BI."
+TC-INST-036,Option B - Setup New App Button,P0,Engineering,On installation-system,"1. Click Setup New Application","New application modal opens with heading ""New application"". Fields: app-name, app-number, app-oem, app-program, app-volume, app-batch-size, app-material, Add fastener, Cancel, Save."
+TC-INST-037,Option B - Use Existing App Button,P0,Engineering,On installation-system,"1. Click Use Existing Application","My applications modal opens with table of existing apps."
+TC-INST-038,Option B - Default State,P1,Engineering,No app loaded,"1. Observe Option B section","Shows: ""No application selected."" Both buttons visible."
+TC-INST-039,Params - Add New App,P0,Engineering,"","1. Click Add new application under Params section","Same modal as Setup New Application opens."
+TC-INST-040,Params - Add Existing App,P0,Engineering,"","1. Click Add existing application under Params","Same modal as Use Existing Application opens."
+TC-INST-041,Params - Empty State,P1,Engineering,No apps,"1. Observe Applications subsection","Shows: ""No applications yet. Click Add new application or Add existing application to define part and fastener parameters."""
+TC-INST-042,Params - Portfolio KPIs,P1,Engineering,"","1. Observe Portfolio Totals and Derived Inputs","KPIs: Total annual volume (—), Total fasteners/year (—), Fasteners/part (—), Element types/part (—), Parts/year (—). Clear selection disabled. Customize assumptions present."
+TC-INST-043,User Menu - Engineering,P1,Engineering,Logged in as engineering,"1. Observe user menu","Shows avatar ""DW"", name ""David Wilson"", role ""Engineering""."
+TC-INST-044,User Menu - Customer,P1,Customer,Logged in as customer,"1. Observe user menu","Shows avatar ""EB"", name ""Emily Brown"", role ""External/Customer""."
+TC-INST-045,User Menu - Distributor,P1,Distributor,Logged in as distributor,"1. Observe user menu","Shows avatar ""RD"", name ""Robert Davis"", role ""Distributor/Partner""."
+TC-INST-046,User Menu - Sales,P1,Sales,Logged in as sales,"1. Observe user menu","Shows avatar ""MJ"", name ""Michael Johnson"", role ""Sales""."
+TC-INST-047,Request Support Button,P2,Engineering,Scrolled to bottom,"1. Scroll down
+2. Observe floating button","Request Support button visible at bottom-left."
+TC-INST-048,Cross-Role - Engineering Access,P0,Engineering,"","1. Navigate to /installation-system","Access granted. Full page visible."
+TC-INST-049,Cross-Role - Customer Access,P0,Customer,"","1. Navigate to /installation-system","Access granted. Full page visible."
+TC-INST-050,Cross-Role - Distributor Access,P0,Distributor,"","1. Navigate to /installation-system","Access granted. Full page visible."
+TC-INST-051,Cross-Role - Sales Access,P0,Sales,"","1. Navigate to /installation-system","Access granted. Full page visible."
+TC-INST-052,Category Cards - Exact Labels,P1,Engineering,"","1. Verify each category heading and count","Handtools (15 matching), Standalone Machines (13 matching), Robotic Integration (13 matching), InDie (3 matching), Custom (3 matching). Each has subcategory labels."
+TC-INST-053,Home Page - Find Your Installation System,P1,Engineering,On home page,"1. Click ""Find Your Installation System"" button","Navigates to /installation-system."
+TC-INST-054,Home Page - Brand Links,P2,Engineering,On home page,"1. Click each brand link: pemnet, profil-global, haeger, autoriv, sherex","Each link navigates to respective brand site."
+TC-INST-055,Filter Combination - All Filters Active,P1,Engineering,"","1. Select PEM element type
+2. Check Process monitoring required
+3. Set force Min=50
+4. Observe count","All 3 filters active simultaneously. Count reflects intersection."
+TC-INST-056,Filter Reset Preserves Solution Selection,P2,Engineering,Solutions + filters applied,"1. Select A210 solution
+2. Apply filters
+3. Click Reset filters","Filters reset. Solution A210 remains selected."
+TC-INST-057,Zero Results State,P2,Engineering,"","1. Apply very restrictive filters (PROFIL + robot int + force 250-300)","Shows: ""0 matching product(s)"". Grid shows no matching solutions."
+TC-INST-058,Region Selector - React-Select,P2,Engineering,"","1. Observe Region selector at top","React-select dropdown. Default: North America. Changing updates pricing."
+TC-INST-059,Max Thread Selector - React-Select,P2,Engineering,"","1. Observe Max thread selector","React-select dropdown. Default: Any. Changing filters solutions."
+TC-INST-060,Form Fields - Force Range Inputs,P1,Engineering,"","1. Observe force range inputs","Two number inputs: placeholder=""Min"" and ""Max"". Two range sliders. Reset link button. Any text indicator."

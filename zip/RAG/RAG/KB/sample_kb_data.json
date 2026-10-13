@@ -1,0 +1,15 @@
+[
+  {"id": "policy_gold_tier", "category": "policy", "text": "Gold tier customers receive a 10% discount and priority booking on all container shipments."},
+  {"id": "policy_platinum_tier", "category": "policy", "text": "Platinum tier customers receive a 15% discount, priority booking, and a dedicated support contact."},
+  {"id": "policy_standard_tier", "category": "policy", "text": "Standard tier customers receive no discount but get standard-priority booking."},
+  {"id": "policy_cutoff", "category": "policy", "text": "Booking requests must be submitted at least 24 hours before the requested shipment date."},
+  {"id": "policy_reschedule", "category": "policy", "text": "If a booking fails due to no available container slots, offer the customer the next available date within 3 days."},
+  {"id": "policy_cancellation", "category": "policy", "text": "Bookings cancelled more than 48 hours before shipment get a full refund. Cancellations within 48 hours incur a 20% fee."},
+  {"id": "faq_missed_cutoff", "category": "faq", "text": "Q: What happens if I miss the booking cutoff? A: The booking moves automatically to the next available shipment slot; no cancellation is needed."},
+  {"id": "faq_upgrade_tier", "category": "faq", "text": "Q: How do I upgrade my tier? A: Tier upgrades are processed by account services within 2 business days of the request."},
+  {"id": "faq_cancel_after_loading", "category": "faq", "text": "Q: Can I cancel after the shipment is loaded? A: No, once a container is loaded the booking cannot be cancelled or refunded."},
+  {"id": "glossary_cutoff_window", "category": "glossary", "text": "Cutoff window: the deadline before a shipment date by which a booking request must be submitted, currently 24 hours."},
+  {"id": "glossary_gold_tier", "category": "glossary", "text": "Gold tier: a customer account level granting a 10% shipping discount and priority booking."},
+  {"id": "procedure_failed_booking", "category": "procedure", "text": "Failed booking procedure: 1) Check for slots within 3 days. 2) If none, escalate to the operations team. 3) Notify the customer of the delay and new options."},
+  {"id": "procedure_dispute_escalation", "category": "procedure", "text": "Booking dispute escalation: unresolved disputes over charges or cancellations are forwarded to the billing team with the booking ID and customer tier."}
+]

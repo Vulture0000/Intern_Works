@@ -1,0 +1,50 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-MC-001,Open Config Panel,P0,Engineering,On installation-system with A210 selected,"1. Select A210
+2. Click Compare / Configure Solutions
+3. Click Configure Solution on A210 card","Panel opens as overlay. Heading: ""Configure solution"". Shows A210 info, 3 filter dropdowns, Machine/Options/Custom Tooling sections, Configuration summary."
+TC-MC-002,Config Panel - Header Info,P1,Engineering,Config panel open,"1. Observe panel top section","Shows: ""A210 MDS options: A210 | Applications: 0 | Element types: 0"". × close button present."
+TC-MC-003,Config Panel - Filters Section,P1,Engineering,Config panel open,"1. Observe Filters section","Filters heading. 3 dropdowns: Fastener group (options: All), Feeder tracks (options: All, 0), Force (kN) (options: All, 30.00, 65.00). Filtered info text present."
+TC-MC-004,Config Panel - Filter Fastener Group,P2,Engineering,Config panel open,"1. Change Fastener group dropdown
+2. Observe machine options","Options update based on fastener group selection."
+TC-MC-005,Config Panel - Filter Feeder Tracks,P2,Engineering,Config panel open,"1. Change Feeder tracks dropdown
+2. Observe machine options","Options update based on feeder tracks count."
+TC-MC-006,Config Panel - Filter Force Range,P2,Engineering,Config panel open,"1. Change Force (kN) dropdown
+2. Observe machine options","Options update based on force range."
+TC-MC-007,Config Panel - Combined Filters,P1,Engineering,Config panel open,"1. Set all 3 filters to specific values
+2. Observe options","Options filtered by all criteria combined. Only matching options shown."
+TC-MC-008,Config Panel - Available Machine Options Heading,P1,Engineering,Config panel open,"1. Observe ""Available machine options"" section","Heading visible with filtered info text."
+TC-MC-009,Config Panel - Machine Section Cards,P0,Engineering,Config panel open,"1. Observe Machine section","Section heading ""Machine"". Option cards with: name (e.g., ""Changeover set blind rivet nut f. hand tool A210""), price ($615.00), part number (P-A210-RÜST-N), product/subcategory/fastener group/feeder tracks tags."
+TC-MC-010,Config Panel - Options Section (Accessories),P1,Engineering,Config panel open,"1. Observe Options section","Section heading ""Options"". Accessory cards: MDS fasteners (prototype) $4,750, MQTT interface $4,375, Abbildung Panel $3,625, Customer OPC UA $3,625, Interface for hand tool $3,625, Process monitoring $2,813, MDS fasteners (production) $2,475, Quality Data Viewer $2,338."
+TC-MC-011,Config Panel - Custom Tooling Section,P1,Engineering,Config panel open,"1. Observe Custom Tooling section","Heading ""Custom Tooling"". Card with price $0.00. Description: ""Use this placeholder to describe requested custom tooling...""."
+TC-MC-012,Config Panel - Configuration Summary,P0,Engineering,Config panel open,"1. Observe Configuration summary","Heading ""Configuration summary"". Selected options total (initially $0.00). Buttons: Download quotation, Download Word, Add manual line item, Request Quotation / Support."
+TC-MC-013,Config Panel - Add Machine Option,P1,Engineering,Config panel open,"1. Click Add to configuration on a machine option
+2. Observe summary","Option appears in summary. Total updates (e.g., $615.00)."
+TC-MC-014,Config Panel - Add Accessory Option,P1,Engineering,Config panel open,"1. Add an Options section item (e.g., Process monitoring $2,813)
+2. Observe summary","Option appears in summary. Total reflects addition."
+TC-MC-015,Config Panel - Cumulative Total,P1,Engineering,Machine + accessory added,"1. Add machine option ($615) and accessory ($2,813)
+2. Observe total","Total = $615 + $2,813 = $3,428.00. Both items listed in summary."
+TC-MC-016,Config Panel - Summary Option Details,P2,Engineering,One option added,"1. Observe option entry in Configuration summary","Shows: option name, price, tooling part number, tooling type, quantity (1), unit price."
+TC-MC-017,Config Panel - Remove Selected Option,P1,Engineering,Option added to summary,"1. Click remove on the option in summary
+2. Observe total","Option removed. Total decreases. Option available again."
+TC-MC-018,Config Panel - Download Quotation,P1,Engineering,Config panel open,"1. Add at least one option
+2. Click Download quotation","Quotation download initiates (PDF). Or button clickable."
+TC-MC-019,Config Panel - Download Word,P1,Engineering,Config panel open,"1. Click Download Word","Word document download initiates. Or button clickable."
+TC-MC-020,Config Panel - Add Manual Line Item,P2,Engineering,Config panel open,"1. Click Add manual line item
+2. Enter description and price
+3. Submit","Manual item appears in summary. Total updates."
+TC-MC-021,Config Panel - Request Quotation / Support,P1,Engineering,Config panel open,"1. Click Request Quotation / Support","Request form/modal opens. User can submit request."
+TC-MC-022,Config Panel - Close Button,P0,Engineering,Config panel open,"1. Click × close button","Panel dismissed. Back to comparison view."
+TC-MC-023,Config Panel - Different Solutions Show Different Options,P1,Engineering,A210 and 824 eDrive selected,"1. Configure A210, note options
+2. Close, configure 824 eDrive
+3. Compare options","Different solutions show different machine options and accessories specific to that product."
+TC-MC-024,Cross-Role - Engineering,P1,Engineering,"","1. Select, compare, configure","Can open config panel."
+TC-MC-025,Cross-Role - Customer,P1,Customer,"","1. Select, compare, configure","Can open config panel. Options visible."
+TC-MC-026,Cross-Role - Distributor,P1,Distributor,"","1. Select, compare, configure","Can open config panel."
+TC-MC-027,Cross-Role - Sales,P1,Sales,"","1. Select, compare, configure","Can open config panel. Pricing visible."
+TC-MC-028,Config Panel - Price Format USD,P2,Engineering,Config panel open,"1. Observe prices on options","Prices in USD: $X,XXX.XX format. Thousands separated by commas."
+TC-MC-029,Config Panel - Total Shows $0.00 Default,P2,Engineering,Config panel open no selections,"1. Observe Selected options total","Shows $0.00 or equivalent."
+TC-MC-030,Config Panel - Select/Deselect Same Option,P2,Engineering,Config panel open,"1. Add option (total=$615)
+2. Remove option (total=$0)
+3. Add again (total=$615)","Toggle works correctly. No double-counting."
+TC-MC-031,Config Panel - Available Machine Options Count Zero,P2,Engineering,Filters eliminate all options,"1. Set very restrictive config filters
+2. Observe machine section","Zero options shown. Empty state or message may appear."

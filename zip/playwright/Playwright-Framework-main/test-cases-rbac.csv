@@ -1,0 +1,74 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-RBAC-001,Admin - Full Access All Routes,P0,Admin,Admin is logged in on admin portal,"1. Navigate to each route: /users, /roles, /applications, /tasks, /change-log, /analytics
+2. Navigate to each dataset: /datasets/machine-options, /datasets/machine-options-us, /datasets/cad-3d-settings, /datasets/products, /datasets/fasteners, /datasets/profil-fasteners, /datasets/autoriv-fasteners, /datasets/sherex-fasteners, /datasets/profil-indie-options, /datasets/fastener-tooling-mapping, /datasets/tooling-sets, /datasets/pemserter-eur, /datasets/pemserter-usd, /datasets/cost-models, /datasets/calculation-parameters, /datasets/cost-model-tools, /datasets/responsibility-map, /datasets/manual-quote-items, /datasets/landing-content
+3. Navigate to /smtp, /settings/profile","All 27 admin routes are accessible. No 403 or Access Denied errors. Each page shows its correct h1 heading."
+TC-RBAC-002,Admin - Sidebar Groups Expandable,P2,Admin,Admin is logged in on admin portal,"1. Observe sidebar navigation
+2. Click each expandable group header: Machine, Fasteners, Tooling, Pricing, Calculations, Content
+3. Verify sub-items appear","Each group expands/collapses on click. Sub-navigation items are visible when expanded. Active group may be highlighted."
+TC-RBAC-003,Sales - Allowed Routes,P1,Sales,Sales user is logged in on admin portal,"1. Login as sales@penn.com on admin portal
+2. Verify redirect to /users
+3. Navigate to /applications - verify accessible
+4. Navigate to /tasks - verify accessible
+5. Try navigating to /roles
+6. Try /change-log, /analytics, /datasets/*","Sales user can access /users, /applications, and /tasks. Routes /roles, /change-log, /analytics return 403 or redirect. Dataset routes access may vary."
+TC-RBAC-004,Sales - Pricing Visibility (canSeePrices),P1,Sales,Sales is on admin portal,"1. Login as sales@penn.com
+2. Navigate to /datasets/cost-models
+3. Observe pricing data","Pricing data is visible (cost models, unit costs). No 403. Sales user can see pricing per canSeePrices flag."
+TC-RBAC-005,Sales - Quoting Access (canQuote),P1,Sales,Sales is on admin portal,"1. Login as sales@penn.com
+2. Navigate to /applications
+3. Observe quoting features","Applications page loads. Quoting-related UI elements may be visible."
+TC-RBAC-006,Engineering - Admin Portal Access,P1,Engineering,Engineering logs into admin portal,"1. Login as engineering@penn.com on admin portal
+2. Navigate to /users, /applications
+3. Try admin-only routes","Engineer can access /users and /applications. Admin-only routes may show 403."
+TC-RBAC-007,Customer - Self-Service Access,P1,Customer,Customer logs into admin portal,"1. Login as customer@penn.com on admin portal
+2. Navigate to /users
+3. Navigate to /applications","Customer sees user list. Applications page shows only their own applications."
+TC-RBAC-008,Customer - Blocked from Cost Models,P2,Customer,Customer is on admin portal,"1. Login as customer@penn.com
+2. Navigate to /datasets/cost-models","Redirected to /login or 403. Cost data blocked."
+TC-RBAC-009,Distributor - Applications & Tasks,P1,Distributor,Distributor logs into admin portal,"1. Login as distributor@penn.com
+2. Navigate to /applications, /tasks, /users","All three accessible. Page headings visible."
+TC-RBAC-010,Distributor - Blocked Admin Routes,P2,Distributor,Distributor is on admin portal,"1. Navigate to /roles, /change-log, /analytics, /datasets/*","403 or redirect on admin-only routes."
+TC-RBAC-011,Admin - User Menu Sign Out Visible,P2,All Roles,Each role is logged in on admin portal,"1. Click user menu in top-right
+2. Verify Sign Out option","Sign Out button visible for all roles in user menu dropdown."
+TC-RBAC-012,Customer - Own Applications Only,P1,Customer,Customer is on /applications,"1. Login as customer@penn.com
+2. Navigate to /applications
+3. Observe list","Only customer's own applications shown. No other users' data."
+TC-RBAC-013,Sales - Pemserter Price EUR Visibility,P1,Sales,Sales is on admin portal,"1. Login as sales@penn.com
+2. Navigate to /datasets/pemserter-eur
+3. Observe pricing data","EUR pricing data visible if sales has pricing access."
+TC-RBAC-014,Sales - Pemserter Price USD Visibility,P1,Sales,Sales is on admin portal,"1. Navigate to /datasets/pemserter-usd
+2. Observe pricing data","USD pricing data visible."
+TC-RBAC-015,Admin - SMTP Access,P2,Admin,Admin is logged in,"1. Navigate to /smtp
+2. Observe page","SMTP settings page accessible to admin. Shows mail server configuration."
+TC-RBAC-016,Admin - Settings/Profile Access,P2,Admin,Admin is logged in,"1. Navigate to /settings/profile
+2. Observe page","Profile settings accessible. Shows admin's profile info."
+TC-RBAC-017,Sales - Changelog Undo Not Visible,P3,Sales,Sales is on admin portal,"1. Navigate to /change-log (if accessible)
+2. Observe Undo buttons","Undo buttons may not be present for non-admin roles on changelog."
+TC-TWEB-RBAC-01,TestWeb RBAC - Admin Full Access,P0,Admin,Logged in as admin on testweb,"1. Navigate to installation system
+2. Click Setup New Application","Admin can create applications and access management features. New Application modal opens."
+TC-TWEB-RBAC-02,TestWeb RBAC - Sales Can See Prices and Quote,P0,Sales,Logged in as sales on testweb,"1. Navigate to installation system
+2. Select A210
+3. Click Compare/Configure
+4. Verify Configure Solution button","Sales can see prices, generate quotes, and access ROI/Cost Analysis on config panel."
+TC-TWEB-RBAC-03,TestWeb RBAC - Sales Cannot Switch Region,P1,Sales,Logged in as sales on testweb,"1. Navigate to installation system
+2. Observe region selector","Region selector is visible for Sales role."
+TC-TWEB-RBAC-04,TestWeb RBAC - Engineering Full Access,P0,Engineering,Logged in as engineering on testweb,"1. Navigate to installation system
+2. Select A210
+3. Click Compare/Configure","Engineering can see prices, generate quotes, ROI/Cost Analysis, and switch region."
+TC-TWEB-RBAC-05,TestWeb RBAC - Engineering Can Switch Region,P1,Engineering,Logged in as engineering on testweb,"1. Navigate to installation system
+2. Observe region selector","Region selector is interactive and can be changed."
+TC-TWEB-RBAC-06,TestWeb RBAC - Customer Create Own Apps,P0,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Click Setup New Application","Customer can successfully create an application."
+TC-TWEB-RBAC-07,TestWeb RBAC - Customer Cannot See Prices,P1,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Select A210, open comparison and config panel","Prices not displayed to customer. Price fields show '—' or are hidden."
+TC-TWEB-RBAC-08,TestWeb RBAC - Customer Cannot Generate Quotes,P1,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Select A210, open config panel","Download quotation and Download Word buttons are not visible for customer."
+TC-TWEB-RBAC-09,TestWeb RBAC - Customer No ROI/Cost Analysis,P1,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Select A210, open comparison","Download Cost Analysis and Generate ROI Report buttons are not visible."
+TC-TWEB-RBAC-10,TestWeb RBAC - Distributor Create Own Apps,P0,Distributor,Logged in as distributor on testweb,"1. Navigate to installation system
+2. Click Setup New Application","Distributor can successfully create an application."
+TC-TWEB-RBAC-11,TestWeb RBAC - Distributor Cannot See Prices,P1,Distributor,Logged in as distributor on testweb,"1. Navigate to installation system
+2. Select A210, open config panel","Prices not displayed to distributor."
+TC-TWEB-RBAC-12,TestWeb RBAC - Distributor No Quote or ROI,P1,Distributor,Logged in as distributor on testweb,"1. Navigate to installation system
+2. Select A210, open config and comparison","Download quotation, Download Word, Download Cost Analysis, Generate ROI Report not visible."
+TC-TWEB-RBAC-13,TestWeb RBAC - Unauthenticated Blocked,P0,None,Not logged in,"1. Navigate to /installation-system","Redirected to /login. Cannot access protected content."

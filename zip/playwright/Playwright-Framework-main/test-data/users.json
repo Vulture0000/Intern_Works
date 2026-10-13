@@ -1,0 +1,38 @@
+{
+  "admin": {
+    "username": "admin@penn.com",
+    "password": "12345678",
+    "role": "Admin",
+    "use_for": "Admin Portal tests"
+  },
+  "engineering": {
+    "username": "engineering@penn.com",
+    "password": "12345678",
+    "role": "Engineering",
+    "use_for": "Test Web Portal — engineer role tests"
+  },
+  "customer": {
+    "username": "customer@penn.com",
+    "password": "12345678",
+    "role": "External/Customer",
+    "use_for": "Test Web Portal — customer role tests"
+  },
+  "distributor": {
+    "username": "distributor@penn.com",
+    "password": "12345678",
+    "role": "Distributor/Partner",
+    "use_for": "Test Web Portal — distributor role tests"
+  },
+  "sales": {
+    "username": "sales@penn.com",
+    "password": "12345678",
+    "role": "Internal Sales",
+    "use_for": "Test Web Portal — sales role tests"
+  },
+  "pemnet_invalid": {
+    "username": "bad@server.com",
+    "password": "wrongpass",
+    "role": "Non-existent account",
+    "use_for": "Wrong credentials error tests"
+  }
+}

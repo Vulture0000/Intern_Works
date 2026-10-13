@@ -1,0 +1,50 @@
+{
+  "groups": {
+    "Admin Portal": {
+      "specs": ["tests/admin-login", "tests/admin-pages", "tests/admin-settings", "tests/admin-datasets", "tests/admin-portal", "tests/admin-sidebar-navigation", "tests/admin-dashboard", "tests/admin-email-notifications", "tests/admin-responsibility-mapping"],
+      "description": "All admin portal tests (login, dashboard, settings, datasets, pages, sidebar, email, RBAC)"
+    },
+    "E2E Flows": {
+      "specs": ["tests/e2e-flows/e2e-flows.spec.js"],
+      "description": "End-to-end flow tests"
+    },
+    "App Flows Enhanced": {
+      "specs": ["tests/installation-system/installation-system-application-flows.spec.js"],
+      "description": "Application flows enhanced tests (TC-APP-xxx)"
+    },
+    "Machine Config Basic": {
+      "specs": ["tests/machine-configuration/machine-configuration.spec.js"],
+      "grep": "TC-MC-\\d{1,2}[^\\d]",
+      "description": "Machine config basic tests (TC-MC-01 to TC-MC-18)"
+    },
+    "Machine Config Enhanced": {
+      "specs": ["tests/machine-configuration/machine-configuration.spec.js"],
+      "grep": "TC-MC-\\d{3}",
+      "description": "Machine config enhanced tests (TC-MC-001 to TC-MC-031)"
+    },
+    "Installation System": {
+      "specs": ["tests/installation-system/installation-system.spec.js"],
+      "grep": "TC-INST-\\d{1,2}[^\\d]",
+      "description": "Installation system basic tests (TC-INST-01 to TC-INST-20)"
+    },
+    "Installation System Enhanced": {
+      "specs": ["tests/installation-system/installation-system.spec.js", "tests/installation-system/installation-system-enhanced.spec.js"],
+      "grep": "TC-INST-\\d{3}",
+      "description": "Installation system enhanced tests (TC-INST-001 to TC-INST-060)"
+    },
+    "Installation App Flows": {
+      "specs": ["tests/installation-system/installation-system-application-flows.spec.js"],
+      "grep": "TC-INST-APP-",
+      "description": "Installation application flows tests (TC-INST-APP-xx)"
+    },
+    "TestWeb Portal": {
+      "specs": ["tests/testweb-login", "tests/testweb-home", "tests/testweb-register", "tests/testweb-forgot-password", "tests/testweb-role-based-access-control", "tests/cross-cutting-edge-cases", "tests/installation-system/installation-system-application-flows.spec.js"],
+      "grep": "TC-TW-|TC-EDGE-",
+      "description": "TestWeb portal tests (login, register, home, forgot-password, role-based access, edge cases)"
+    },
+    "RBAC": {
+      "specs": ["tests/role-based-access-control/role-based-access-control.spec.js", "tests/testweb-role-based-access-control/testweb-role-based-access-control.spec.js"],
+      "description": "Role-based access control tests (admin + testweb)"
+    }
+  }
+}

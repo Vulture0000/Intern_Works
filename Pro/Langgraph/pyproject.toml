@@ -1,0 +1,13 @@
+[project]
+name = "langgraph"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=2.16.0",
+    "langgraph-cli[inmem]>=0.1.54",
+    "langsmith>=0.10.15",
+    "protobuf>=7.35.1",
+    "python-certifi-win32>=1.6.1",
+    "python-dotenv>=1.2.2",
+    "truststore>=0.10.4",
+]

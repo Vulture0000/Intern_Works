@@ -1,0 +1,106 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-TW-001,Login Page - UI Elements,P0,None,User navigates to test web login,"1. Navigate to https://testweb.configurator.dev.pemnet.ai/login
+2. Observe the entire page","Brand links visible: pemnet, profil-global, haeger, autoriv, sherex. ""Find Your Installation System"" button visible. Sign In button, Register button visible. Email input with placeholder ""name@company.com"". ""Send code"" button for magic link. ""Sign in with a password instead"" link. ""Don't have an account? Register"" link."
+TC-TW-002,Login - Happy Path Password Flow (Engineering),P0,Engineering,User is on login page,"1. Navigate to /login
+2. Enter email: engineering@penn.com
+3. Click ""Sign in with a password instead""
+4. Enter password: 12345678
+5. Click ""Sign In""","User is redirected to home page (/). User menu shows ""David Wilson"", role ""Engineering""."
+TC-TW-003,Login - Happy Path Password Flow (Sales),P0,Sales,User is on login page,"1. Enter sales@penn.com, password: 12345678
+2. Complete login via password flow","Redirected to home. Menu shows ""Michael Johnson"", role ""Sales""."
+TC-TW-004,Login - Happy Path Password Flow (Customer),P0,Customer,User is on login page,"1. Enter customer@penn.com, password: 12345678","Redirected to home. Menu shows ""Emily Brown"", role ""External/Customer""."
+TC-TW-005,Login - Happy Path Password Flow (Distributor),P0,Distributor,User is on login page,"1. Enter distributor@penn.com, password: 12345678","Redirected to home. Menu shows ""Robert Davis"", role ""Distributor/Partner""."
+TC-TW-006,Login - Magic Link Flow UI,P1,None,User is on login page,"1. Enter email: engineering@penn.com
+2. Observe the form before clicking password instead","""Send code"" button visible. Text: ""We'll email you a one-time code."" Email input filled. No password field visible initially."
+TC-TW-007,Login - Magic Link Send Code,P2,Engineering,Email entered on login,"1. Enter engineering@penn.com
+2. Click ""Send code"" button (NOT password instead)","Success message: ""Code sent to your email"". Code input field appears. User can enter 6-digit OTP code."
+TC-TW-008,Login - Invalid Credentials Password Flow,P1,None,User is on login page,"1. Enter bad@server.com
+2. Click password instead, enter wrong password
+3. Click Sign In","User stays on /login. Generic error: ""Sign-in could not be completed"". No info on which field is wrong."
+TC-TW-009,Login - Empty Email Validation,P2,None,User is on login page,"1. Click ""Send code"" without entering email","Validation error on email field. OR button is disabled until email entered."
+TC-TW-010,Login - Empty Password Validation,P2,None,User switched to password mode,"1. Enter email
+2. Click password instead
+3. Click Sign In without password","Validation prevents submission. Password field shows required error."
+TC-TW-011,Login - Case-Insensitive Email,P1,Engineering,User is on login page,"1. Enter ENGINEERING@PENN.COM (UPPERCASE)
+2. Complete password flow","Login succeeds. Email case-insensitive."
+TC-TW-012,Login - Password Field Masked,P3,None,User is on login page in password mode,"1. Enter any password","Characters masked as bullets. Not visible in plain text."
+TC-TW-013,Login - Navigate to Register,P1,None,User is on login page,"1. Click ""Register"" link or button","Navigated to /register page. Registration form visible."
+TC-TW-014,Login - Navigate to Forgot Password,P1,None,User is on login page,"1. Note there is no direct forgot password link on login page (may be in password flow)
+2. If no link, navigate to /forget-password directly","Forgot password page accessible at /forget-password. Email input and Send OTP button visible."
+TC-TW-015,Register Page - UI Elements,P0,None,User navigates to /register,"1. Navigate to /register
+2. Observe full page","Brand links visible. ""Find Your Installation System"" button visible. Heading: ""Create an account"". Subtitle: ""Fill in the details below to get started"". Form fields: First name *, Last name *, Email *, Password * (min 8 chars), Confirm password *, Company *, Telephone number *, Company address *, Function/department * (react-select), Region * (react-select, default: North America). ""Create account"" submit button. ""Already have an account? Sign in"" link to /login."
+TC-TW-016,Register - Happy Path Complete Registration,P1,None,User has valid registration data,"1. Navigate to /register
+2. Fill: First name=""John"", Last name=""Doe"", Email=""john.doe@test.com"", Password=""TestPass123!"", Confirm password=""TestPass123!"", Company=""Test Corp"", Telephone=""+1234567890"", Company address=""123 Test St"", Function/Department=""Engineering"", Region=""North America""
+3. Click ""Create account""","Account created successfully. Success message shown OR redirected to login/home. User can login with new credentials."
+TC-TW-017,Register - Password Mismatch Validation,P1,None,User is on /register,"1. Fill password=""Test1234"" and confirm password=""Different5678""
+2. Click Create account","Error message: ""Passwords do not match"". Form not submitted."
+TC-TW-018,Register - Weak Password Validation,P1,None,User is on /register,"1. Fill password=""123"" (less than 8 characters)
+2. Click Create account","Password validation error: ""At least 8 characters"". Form not submitted."
+TC-TW-019,Register - Required Fields Validation,P1,None,User is on /register,"1. Click ""Create account"" without filling any fields","Validation errors shown for all required (*) fields. First name, Last name, Email, Password, Confirm password, Company, Telephone, Company address, Function/department, Region all show required errors."
+TC-TW-020,Register - Invalid Email Format,P2,None,User is on /register,"1. Fill email=""notanemail""
+2. Click Create account","Email validation error. Form not submitted."
+TC-TW-021,Register - Email Already Exists,P2,None,User is on /register,"1. Fill email=engineering@penn.com (already registered)
+2. Complete all other fields
+3. Click Create account","Error message: ""Email already registered"" or similar. Account not created."
+TC-TW-022,Register - Telephone Number Validation,P2,None,User is on /register,"1. Fill telephone=""abc"" (invalid format)
+2. Click Create account","Telephone validation error. OR field accepts text but server validates."
+TC-TW-023,Register - Cancel/Navigate Away,P2,None,User is on /register,"1. Click ""Sign in"" link","Navigated to /login page. Form data is not saved."
+TC-TW-024,Forgot Password Page - UI Elements,P0,None,User navigates to /forget-password,"1. Navigate to /forget-password
+2. Observe full page","Heading: ""Forgot password"". Text: ""Enter your registered email address. We will send you a OTP to reset your password."" Email input with placeholder ""name@company.com"". ""Send OTP"" button. ""Remember your password? Sign in"" link."
+TC-TW-025,Forgot Password - Send OTP Happy Path,P1,None,User has a registered account,"1. Navigate to /forget-password
+2. Enter email: engineering@penn.com
+3. Click ""Send OTP""","Success message: ""OTP sent to your email"". OTP input field appears. User can enter the 6-digit code."
+TC-TW-026,Forgot Password - Unregistered Email,P2,None,User is on /forget-password,"1. Enter email: nonexistent@test.com
+2. Click Send OTP","Error message or generic response. System should NOT reveal if email is registered for security."
+TC-TW-027,Forgot Password - Empty Email Validation,P2,None,User is on /forget-password,"1. Click ""Send OTP"" without entering email","Validation error on email field. Button disabled until email entered."
+TC-TW-028,Forgot Password - Navigate to Sign In,P2,None,User is on /forget-password,"1. Click ""Sign in"" link","Navigated to /login page."
+TC-TW-029,Home Page - UI Elements (Unauthenticated),P1,None,User is not logged in,"1. Navigate to https://testweb.configurator.dev.pemnet.ai/
+2. Observe page","Brand links visible. ""Find Your Installation System"" button visible. Sign in and Register buttons visible."
+TC-TW-030,Home Page - UI Elements (Authenticated),P1,Engineering,User is logged in,"1. Login as engineering
+2. Observe home page","User menu visible (David Wilson/Engineering). Brand links visible. ""Find Your Installation System"" button visible."
+TC-TW-031,Home Page - Navigate to Installation System,P0,Engineering,User is on home page logged in,"1. Click ""Find Your Installation System"" button","Navigated to /installation-system. Full configurator page loads."
+TC-TW-032,Home Page - Brand Links Navigate Correctly,P2,Engineering,User is on any page,"1. Click each brand link (pemnet, profil-global, haeger, autoriv, sherex)
+2. For each, verify navigation","Each link opens the corresponding brand website. Links are functional and not broken."
+TC-TW-033,Logout - Via User Menu,P0,Engineering,User is logged in,"1. Click user menu (showing name)
+2. Click Sign Out
+3. Wait for redirect","User redirected to login page or home page. Session terminated."
+TC-TW-034,Protected Route - Without Auth,P0,None,Not logged in,"1. Navigate to /installation-system
+2. Wait for load","Redirected to /login. Cannot access protected routes."
+TC-TW-035,Session - Expired Session Redirects,P1,Engineering,Session expired,"1. Login as engineering
+2. Clear cookies, localStorage, sessionStorage
+3. Navigate to /installation-system","Redirected to /login. Must re-authenticate."
+TC-TW-036,Session - Login Persists Across Tabs,P1,Engineering,Logged in on one tab,"1. Login in tab 1
+2. Open new tab
+3. Navigate to /installation-system","Already authenticated. No re-login needed."
+TC-TW-037,Session - Page Refresh Preserves Session,P1,Engineering,Logged in on /installation-system,"1. Refresh browser (F5/Cmd+R)","User remains logged in. Page reloads without login redirect."
+TC-TW-038,Registration - Long Password Validation,P3,None,User is on /register,"1. Enter password of 100+ characters
+2. Confirm same
+3. Click Create account","Either accepted or rejected with max length error. No crash or UI issue."
+TC-TW-039,Registration - Special Characters in Name,P3,None,User is on /register,"1. Enter First name with special chars: ""John™<test>"" 
+2. Complete registration","Either accepted (sanitized) or rejected with validation. No XSS or injection."
+TC-TW-040,Registration - All Fields Max Length,P3,None,User is on /register,"1. Fill all fields with very long values (500+ chars)
+2. Click Create account","Inputs respected max length OR truncated. No database/crash errors."
+TC-TW-041,Forgot Password - Invalid OTP Attempts,P2,None,User receives OTP,"1. Request OTP for valid email
+2. Enter incorrect OTP code 3+ times","Error message: ""Invalid OTP"". Account may be temporarily locked after X attempts."
+TC-TW-042,Forgot Password - OTP Expiry,P2,None,OTP was sent,"1. Request OTP
+2. Wait longer than OTP validity period
+3. Enter the OTP","Error: ""OTP expired"". User needs to request a new OTP."
+TC-TW-043,Login - Password Instead Button Toggle,P2,None,User is on login page,"1. Enter email
+2. Click ""Sign in with a password instead""
+3. Observe UI transition","Password field appears. Send code button replaced with Sign In button. Or Send code button moves/stays."
+TC-TW-044,Login - Email Input Autocomplete,P3,None,User is on login page,"1. Start typing in email field
+2. Check autocomplete behavior","Browser autocomplete suggestions appear for previously used emails. Field has autocomplete attribute."
+TC-EDGE-001,Cross-Cutting - Rapid Double-Click Sign In,P2,None,User on login page,"1. Fill valid credentials
+2. Rapidly click Sign In twice","No duplicate submission errors. User logged in or remains on login without error."
+TC-EDGE-002,Cross-Cutting - XSS Injection Sanitized,P2,None,User on register page,"1. Enter '<script>alert("XSS")</script>' in name field
+2. Fill other required fields","Script tag not executed. Input sanitized in DOM."
+TC-EDGE-003,Cross-Cutting - Loading Spinner Visible,P2,Engineering,Logged in on testweb,"1. Navigate to installation system","Loading spinner or progress indicator visible while page loads, or content renders directly."
+TC-EDGE-004,Cross-Cutting - Browser Back/Forward State,P2,Engineering,Logged in on testweb on installation system,"1. Select A210 checkbox
+2. Navigate away
+3. Press browser back","Page renders correctly after back navigation without corruption."
+TC-EDGE-005,Cross-Cutting - Unicode Input Handling,P3,None,User on register page,"1. Enter unicode text: 'Hello 世界 ñoño 🔧 테스트' in name field","Unicode characters accepted and displayed correctly."
+TC-EDGE-006,Cross-Cutting - Very Long Input,P3,None,User on register page,"1. Enter 5000 characters in name field","Long text accepted without browser crash or truncation."
+TC-EDGE-007,Cross-Cutting - Config Panel Loads,P1,Engineering,Logged in on testweb,"1. Navigate to installation system
+2. Select A210, open comparison and config panel","Configuration panel visible with machine options, filters, and action buttons."
+TC-EDGE-008,Cross-Cutting - Invalid Credentials Error,P1,None,User on login page,"1. Enter nonexistent email and wrong password
+2. Click Sign In","Error message displayed (e.g. 'Sign-in could not be completed'). User remains on login page."

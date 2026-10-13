@@ -1,0 +1,101 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-E2E-001,Full Flow: Admin User Management → App Config → Quote,P0,Admin + Engineering,Admin and Engineering users exist,"1. Admin logs into admin portal and verifies /users
+2. Admin checks /applications to view all apps
+3. Engineering logs into test web portal
+4. Engineering navigates to /installation-system
+5. Engineering selects a solution (A210)
+6. Engineering opens comparison and configures options
+7. Engineering views configuration summary","Admin can see all users and applications. Engineering can complete the full configurator flow: filter → select → compare → configure → view summary."
+TC-E2E-002,Full Flow: Create Application → Auto-Filter → Configure,P0,Engineering,User is logged in as engineering,"1. Login as engineering on test web portal
+2. Navigate to /installation-system
+3. Record initial match count
+4. Click ""Setup New Application""
+5. Fill name=""Demo App"", volume=100000, material=""Steel""
+6. Click ""Save""
+7. Verify filters auto-updated
+8. Select matching solution (from filtered list)
+9. Click ""Compare / Configure Solutions""
+10. Click ""Configure Solution""
+11. Add a machine option to configuration
+12. Observe portfolio totals updated","App created successfully. Filters auto-set based on app. Solutions filtered. Config panel shows options. Portfolio updated. Full end-to-end flow works."
+TC-E2E-003,Full Flow: Multi-App Portfolio → Configure Two Solutions,P1,Engineering,User is logged in as engineering,"1. Login and go to /installation-system
+2. Create ""App Alpha"" with volume=80000
+3. Create ""App Beta"" with volume=120000
+4. Verify portfolio shows total 200,000
+5. Select solution A210 and 824 eDrive
+6. Compare and configure both
+7. Navigate between config panels","Portfolio combines both apps. Multiple solutions can be compared. Configuration works for each solution independently."
+TC-E2E-004,Full Flow: Use Existing App → Modify → Regenerate,P1,Engineering,User has existing saved applications,"1. Login as engineering
+2. Navigate to /installation-system
+3. Click ""Use Existing Application""
+4. Select a previously created app
+5. Click OK to load it
+6. Edit the app - change volume
+7. Save and observe portfolio update
+8. Select solution and configure","Existing app loads correctly. Editing updates portfolio. Configuration flow works with loaded app data."
+TC-E2E-005,Full Flow: Save Configuration → Return Later,P2,Engineering,User has configured a solution,"1. Login as engineering
+2. Create an app, select solution, configure options
+3. Sign out
+4. Login again as engineering
+5. Navigate to /installation-system
+6. Load same app via Use Existing
+7. Select same solution and configure","User can complete the flow across sessions. Previously saved apps persist. Configuration state may or may not persist (document behavior)."
+TC-E2E-006,Cross-Portal: Admin Creates User → Engineering Uses App,P2,Admin + Engineering,Admin and Engineering users exist,"1. Admin logs in, navigates to /users
+2. Admin verifies engineering user exists
+3. Engineering logs into test web portal
+4. Engineering creates an application
+5. Admin logs in again, navigates to /applications
+6. Admin can see engineering's application","Admin can see all applications across users. Application created by engineering is visible in admin's /applications page."
+TC-E2E-007,Flow: Negative - Access Without Login Any Page,P1,None,User is not authenticated,"1. Clear all browser data
+2. Try accessing: /installation-system
+3. Try accessing: / (test web home)
+4. Try accessing: /login (should work)
+5. Try accessing admin: /users
+6. Try accessing admin: /roles","All protected pages redirect to /login. Only /login is accessible without authentication."
+TC-E2E-008,Flow: Negative - Rapid Login Attempts (Brute Force),P1,None,User is on admin login page,"1. Navigate to admin /login
+2. Attempt login 5+ times rapidly with invalid credentials
+3. Observe behavior after repeated failures","After multiple failed attempts, either: account is temporarily locked, CAPTCHA appears, increasing delay introduced, or error message changes. Rate limiting is in place."
+TC-E2E-009,Flow: Edge - Concurrent Sessions Same User,P2,Engineering,Same user credentials available,"1. Login as engineering in Browser A (tab 1)
+2. Login as engineering in Browser B (tab 2, different browser/context)
+3. Perform actions in both sessions","Both sessions allow concurrent access. OR second login invalidates first session. Document the behavior."
+TC-E2E-010,Flow: Edge - All Filter Combinations Maximal,P2,Engineering,User is on installation-system page,"1. Select all 4 element types
+2. Check both capabilities
+3. Set force range to full (21-300)
+4. Observe matching count","All filters are active simultaneously. Count shows intersection of all criteria. UI renders correctly with all filters active."
+TC-E2E-011,Flow: Edge - Maximum Solutions Selected,P3,Engineering,User is on installation-system page,"1. Select as many solutions as the UI allows (try selecting all 47)
+2. Click Compare / Configure Solutions
+3. Observe comparison cards","UI handles large selection gracefully. Comparison cards display within viewport. Scrolling works if needed."
+TC-E2E-012,Flow: Edge - Edit App Name While Solutions Configured,P2,Engineering,User has app loaded and configured,"1. Create app ""Original Name""
+2. Select solution and configure options
+3. Edit the app and rename to ""Updated Name""
+4. Save and observe","App card updates to new name. Configuration and solution selections are preserved. No data loss from renaming."
+TC-E2E-013,Flow: Edge - Delete App While Configured,P2,Engineering,User has app loaded and configured,"1. Create an app
+2. Select solution and configure
+3. Remove the app via Remove button
+4. Observe configuration state","App is removed. Configuration panel may close or solution selection resets. No orphaned state."
+TC-E2E-014,Flow: All 4 Roles Complete Basic Flow,P1,All Roles,All 4 role users exist,"1. Login as Engineering: create app, select solution, configure
+2. Login as Customer: select solution, view options
+3. Login as Distributor: select solution, view options
+4. Login as Sales: select solution, configure, view pricing","Each role can complete their authorized flow. No role experiences errors for authorized actions."
+TC-E2E-015,Flow: Admin Logs Out → Other User Logs In,P1,Admin + Engineering,Two different user accounts,"1. Login as admin on admin portal
+2. Sign out
+3. Login as engineering on admin portal (not test web)
+4. Navigate to /applications
+5. Verify engineering's dashboard","Session from admin is properly terminated. Engineering can login independently. No session leakage between users."
+TC-E2E-016,Flow: Mobile - Responsive Installation System,P3,Engineering,User is on mobile device,"1. Simulate mobile viewport (375x812 iPhone)
+2. Login as engineering
+3. Navigate to /installation-system
+4. Attempt to: select filter, choose solution, compare","Page renders for mobile. Filters may collapse. Solutions grid stacks vertically. User can complete basic flow on mobile."
+TC-E2E-017,Flow: Tab Switch - Filters Persist Across Navigation,P2,Engineering,User has filters applied,"1. Apply filters (PEM selected, force 50-150)
+2. Without deselecting, navigate to another browser tab
+3. Switch back to installation system tab","Filters remain applied when returning to the tab. No session loss on tab switch."
+TC-E2E-018,Flow: Browser Refresh - App State Preserved,P1,Engineering,User has app loaded and solutions selected,"1. Create app, select solutions
+2. Refresh browser (F5/Cmd+R)
+3. Observe page state","App remains loaded. Solutions remain selected. Page state is preserved after refresh (state stored in session or fetched from server)."
+TC-E2E-019,Flow: Performance - Installation System Load Time,P2,Engineering,User has fast internet connection,"1. Start timer
+2. Login as engineering
+3. Navigate to /installation-system
+4. Measure time until all elements visible","Page loads within acceptable time (< 5 seconds for full load, < 3 seconds for interactive). No long loading spinners."
+TC-E2E-020,Flow: Admin Analytics - Data Reflects Test Web Activity,P2,Admin + Engineering,Admin and Engineering both active,"1. Engineering uses test web portal (creates apps, configures)
+2. Admin navigates to /analytics on admin portal
+3. Observe analytics data","Analytics dashboard shows metrics that include engineering's activity (total apps, sessions, etc.). Data is consistent between portals."

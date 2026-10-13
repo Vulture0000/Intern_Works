@@ -1,0 +1,138 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-APP-001,Setup New App - Modal UI Elements,P0,Engineering,User is on installation-system page,"1. Click ""Setup New Application"" button under Option B
+2. Observe the modal that opens","Modal with heading ""New application"" opens. Fields visible: App name (required, placeholder ""e.g., Samplepart 1""), App number, OEM, Program, Volume (number), Batch size (number), Material. Buttons: Add fastener, Cancel, Save. × close button visible."
+TC-APP-002,Setup New App - Save With Name Only (Happy Path),P0,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill app-name with ""Test App Auto""
+3. Click ""Save""","Modal closes. Application appears in Applications section with name ""Test App Auto"". Option B shows ""Selected: Test App Auto"" with ""Reset application"" button. ""No application selected."" text disappears."
+TC-APP-003,Setup New App - Save With All Fields (Happy Path),P0,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill: name=""Full Test App"", app-no=""FULL-001"", OEM=""BMW"", program=""X-Series"", volume=200000, batch-size=1000, material=""Aluminum EN AW-6082 T6""
+3. Click ""Save""","Modal closes. App card shows name ""Full Test App"" with details: App No.: FULL-001, 200,000 pcs/year. Portfolio totals update: Total annual volume = 200,000. Parts/year = 200,000."
+TC-APP-004,Setup New App - Required Field Validation (Empty Name),P1,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Leave app-name empty
+3. Click ""Save""","Save is prevented. Modal remains open. Either error message shown for required field, or Save button is disabled until name is entered. Application is NOT created."
+TC-APP-005,Setup New App - Negative Volume Validation,P1,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Valid Name"", volume=-100
+3. Click ""Save""","Negative volume is rejected. Either input prevents entry of negative values, OR error message is shown, OR modal remains open. Application is NOT created with invalid data."
+TC-APP-006,Setup New App - Zero Volume Edge Case,P2,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Zero Volume App"", volume=0
+3. Click ""Save""","Zero volume is either accepted (app created) or rejected with validation. Document the behavior."
+TC-APP-007,Setup New App - Zero Batch Size Edge Case,P2,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Zero Batch"", batch-size=0
+3. Click ""Save""","Zero batch size is either accepted or rejected with validation error. Document the behavior."
+TC-APP-008,Setup New App - Extremely Large Volume,P2,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Large Volume"", volume=999999999 (very large number)
+3. Click ""Save""","Large volume is either accepted (with formatted display) or rejected. Check if number formatting works for large values."
+TC-APP-009,Setup New App - Cancel Closes Modal Without Saving,P0,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Cancel Test"", app-number=""CANCEL-001""
+3. Click ""Cancel""","Modal closes. No application is created. Option B still shows ""No application selected.""."
+TC-APP-010,Setup New App - × Close Button Closes Modal,P1,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill some fields
+3. Click × close button","Modal closes. No application is created. Page returns to previous state."
+TC-APP-011,Setup New App - ESC Key Closes Modal,P2,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Press Escape key","Modal closes. No application is created. Document if ESC key dismisses the modal."
+TC-APP-012,Setup New App - Add Single Fastener,P1,Engineering,User has new app modal open,"1. Click ""Setup New Application""
+2. Fill name=""With Fastener""
+3. In fastener section: select brand (e.g., PEM from react-select), enter type=""SS"", qtyA=4, qtyB=2
+4. Click ""Add fastener""
+5. Click ""Save""","Application is created with fastener. Fastener details appear in app card or in edit form."
+TC-APP-013,Setup New App - Add Multiple Fasteners,P1,Engineering,User has new app modal open,"1. Click ""Setup New Application""
+2. Fill name=""Multi Fastener App""
+3. Add first fastener (brand=PEM, type=SS, qtyA=4, qtyB=2) via Add fastener
+4. Add second fastener (brand=SHEREX, type=CLS, qtyA=6, qtyB=3)
+5. Click ""Save""","Application created with 2 fasteners. Both fastener entries are persisted and visible in edit mode."
+TC-APP-014,Setup New App - Remove Fastener Before Save,P2,Engineering,User has added a fastener in new app modal,"1. Add a fastener during setup
+2. Click remove/delete on the fastener entry
+3. Click ""Save""","Fastener is removed. Application is created without the deleted fastener. Document if remove button exists on fastener rows."
+TC-APP-015,Setup New App - Auto-Sets Filters After Save,P1,Engineering,User is on installation-system page with no application,"1. Record initial matching product count
+2. Click ""Setup New Application""
+3. Fill name=""Filter Test App"" (with PEM-relevant data implied)
+4. Click ""Save""","Option B shows ""Selected: Filter Test App"". Element types filter chip auto-updates based on application. Matching product count changes. ""Reset application"" button appears."
+TC-APP-016,Setup New App - Portfolio Updates After Save,P1,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Portfolio App"", volume=150000, batch-size=500
+3. Click ""Save""
+4. Observe portfolio KPIs","Portfolio totals show: Total annual volume = 150,000. Parts/year = 150,000. Other KPIs may show calculated values."
+TC-APP-017,Edit App - Open Edit Form With Pre-filled Values,P0,Engineering,User has an existing application,"1. Create an app ""Edit Test App"" with volume=50000
+2. Click ""Edit"" button on the app card
+3. Verify form opens","Edit modal opens with heading ""Edit:"" followed by app name. All fields are pre-populated with saved values."
+TC-APP-018,Edit App - Modify And Save,P0,Engineering,User has edit modal open,"1. In edit form, change name to ""Updated Edit App"" and volume to 75000
+2. Click ""Save""","App card updates: name shows ""Updated Edit App"", volume shows 75,000. Changes are persisted."
+TC-APP-019,Edit App - Cancel Edit Preserves Original Values,P1,Engineering,User has edit modal open with changes,"1. Open edit, change name to ""Changed Name""
+2. Click ""Cancel"" without saving","Edit modal closes. App card still shows original name. Changes are NOT saved."
+TC-APP-020,Edit App - Add Fastener to Existing App,P2,Engineering,User has an existing app without fasteners,"1. Create app ""No Fastener Yet""
+2. Click ""Edit"" on the app card
+3. Add a fastener (brand=PEM, type=SS, qtyA=2, qtyB=1)
+4. Click ""Save""","Fastener is added to existing app. When editing again, the fastener is visible."
+TC-APP-021,Edit App - Remove Fastener from Existing App,P2,Engineering,User has an existing app with fasteners,"1. Create app with a fastener
+2. Click Edit, remove the fastener entry
+3. Click Save","Fastener is removed from the app. App card no longer shows fastener info."
+TC-APP-022,Remove App - Single App,P0,Engineering,User has exactly one application,"1. Create an app ""Remove Test App""
+2. Click ""Remove"" button on the app card","Application is removed. ""No application selected."" returns. Option B shows original buttons. Portfolio totals reset to ""—"". Filters reset."
+TC-APP-023,Remove App - One of Multiple Apps,P1,Engineering,User has two applications,"1. Create ""Keep This App"" and ""Remove This App""
+2. Click ""Remove"" on ""Remove This App""","One app removed. Other app remains. Portfolio totals recalculate. Applications count decreases."
+TC-APP-024,Reset Application - Deselect Without Deleting,P1,Engineering,User has one application selected,"1. Create ""Reset Test App""
+2. Click ""Reset application"" button under Option B","Filters reset to defaults. ""No application selected."" returns. App card still visible in Applications section (app is NOT deleted, just deselected)."
+TC-APP-025,Use Existing App - Modal UI Elements,P0,Engineering,User has at least one saved app,"1. Click ""Use Existing Application"" under Option B
+2. Observe the modal","Modal with heading ""My applications"" opens. Table visible with columns: Select (checkbox), Name, App No., OEM, Program, Company, Owner, Actions (Edit, Delete). Buttons: Select all, New application, Refresh, Close, OK."
+TC-APP-026,Use Existing App - Select And Load,P0,Engineering,User has existing apps in the system,"1. Click ""Use Existing Application""
+2. Check checkbox of one app
+3. Click ""OK""","Modal closes. Selected app loads into Applications section. App card shows the app details. Option B shows ""Selected: {app name}"". Portfolio totals and filters auto-update."
+TC-APP-027,Use Existing App - Select Multiple Apps,P1,Engineering,User has existing apps in the system,"1. Click ""Use Existing Application""
+2. Check multiple app checkboxes
+3. Click ""OK""","Multiple apps load into Applications section. Multiple app cards appear. Portfolio totals combine both apps."
+TC-APP-028,Use Existing App - Select All,P1,Engineering,User has multiple existing apps,"1. Click ""Use Existing Application""
+2. Click ""Select all"" button
+3. Verify checkboxes
+4. Click ""OK""","All rows become checked automatically. After OK, all apps load into the section."
+TC-APP-029,Use Existing App - New Application From Modal,P1,Engineering,User has Use Existing modal open,"1. Click ""Use Existing Application""
+2. Click ""New application"" button within the modal","Modal switches to the Setup New Application form. User can create a new app from this entry point. Same fields and behavior."
+TC-APP-030,Use Existing App - Edit From Modal,P1,Engineering,User has Use Existing modal open with apps,"1. Click ""Use Existing Application""
+2. Click ""Edit"" in a row's Actions column
+3. Modify fields in edit form
+4. Click ""Save""","Edit form opens with pre-filled values. After save, the table row updates. Changes are persisted."
+TC-APP-031,Use Existing App - Delete From Modal,P1,Engineering,User has Use Existing modal open with apps,"1. Click ""Use Existing Application""
+2. Click ""Delete"" in a row's Actions column
+3. Confirm deletion","The app is deleted from the system. Row disappears from table. If it was loaded in params section, it is removed from there too."
+TC-APP-032,Use Existing App - Refresh List,P2,Engineering,User has Use Existing modal open,"1. Click ""Use Existing Application""
+2. Click ""Refresh"" button","The application list refreshes. Newly created apps appear in the table."
+TC-APP-033,Use Existing App - Close Without Selecting,P0,Engineering,User has Use Existing modal open,"1. Click ""Use Existing Application""
+2. Click ""Close"" button or × close button","Modal closes. No app is selected. Page returns to previous state with ""No application selected."" visible."
+TC-APP-034,Use Existing App - Empty Table State,P2,Engineering,User has no existing apps in the system,"1. Log in as a fresh user with no apps
+2. Click ""Use Existing Application""
+3. Observe the table","Table shows empty state: ""No applications found"" or similar message. Buttons (New application, Close) are still visible."
+TC-APP-035,Multiple Apps - Add Two Apps via Add New,P1,Engineering,User has one existing app,"1. Create first app ""App One"" (volume=100000)
+2. Click ""Add new application"" and create ""App Two"" (volume=50000)
+3. Observe Applications section","Both apps appear as separate cards. Heading shows ""Applications (2)"". Portfolio totals combine both (total volume = 150,000)."
+TC-APP-036,Multiple Apps - Verify Portfolio Calculates Correctly,P1,Engineering,User has two apps with different volumes,"1. Create ""App One"" with volume=100000
+2. Create ""App Two"" with volume=50000
+3. Observe portfolio totals","Total annual volume = 150,000 (sum of both). Parts/year = 150,000. Other KPIs calculate correctly based on combined data."
+TC-APP-037,Clear Selection - Removes All Apps,P1,Engineering,User has one or more apps loaded,"1. Create at least one app
+2. Click ""Clear selection"" button","All apps cleared from Applications section. ""No applications yet."" empty state returns. Portfolio totals reset to ""—"". Filters reset to defaults."
+TC-APP-038,Clear Selection - Button State (Enabled/Disabled),P2,Engineering,User has various app states,"1. With no apps: observe Clear selection button state
+2. Add an app: observe button state changes","Clear selection is disabled (grayed) when no apps are loaded. Becomes enabled when at least one app is loaded."
+TC-APP-039,Customize Assumptions - Modal Opens,P1,Engineering,User has at least one app loaded,"1. Create an app
+2. Click ""Customize assumptions"" button
+3. Observe the dialog/panel","A modal or panel opens with heading ""Customize assumptions"". Fields for utilization rate, cost factors, etc. may be present. Close/Cancel button available."
+TC-APP-040,Customize Assumptions - Modify And Save,P2,Engineering,Customize assumptions modal is open,"1. Open Customize assumptions
+2. Modify a value (e.g., utilization rate)
+3. Click ""Save"" or ""Apply""","Assumptions values are updated. Portfolio KPIs may recalculate based on new assumptions."
+TC-APP-041,Customize Assumptions - Cancel Without Saving,P2,Engineering,Customize assumptions modal is open,"1. Open Customize assumptions
+2. Modify a value
+3. Click ""Cancel"" or close button","Modal closes. Changes are NOT applied. Assumptions remain at previous values."
+TC-APP-042,Add Existing From Params Section,P1,Engineering,User is on params section,"1. Create an app first
+2. Click ""Clear selection""
+3. Click ""Add existing application"" under params section (not Option B)
+4. Select an app and click OK","Same ""My applications"" modal opens. App loads into params section. Functionally identical to Use Existing Application."
+TC-APP-043,Add New From Params Section,P1,Engineering,User is on params section,"1. Click ""Add new application"" under params section
+2. Fill form and save","Same ""New application"" modal opens. App is created and appears in Applications section."
+TC-APP-044,Setup New App - Special Characters in Name,P2,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Enter name with special chars: ""Test-App #1 (OEM)""
+3. Click ""Save""","App is created with special characters. Name displays correctly on app card (no encoding issues)."
+TC-APP-045,Setup New App - Long Name/Payload,P3,Engineering,User is on installation-system page,"1. Click ""Setup New Application""
+2. Enter very long name (500+ chars)
+3. Click ""Save""","Long name is either truncated, wrapped, or rejected. No UI breaking or database error. Document behavior."
+TC-APP-046,Edit App - Remove All Fasteners Then Save,P2,Engineering,User has app with one fastener,"1. Open edit on app with fastener
+2. Remove the only fastener
+3. Click ""Save""","App is saved without fasteners. App card updates to show no fastener data."
+TC-APP-047,Use Existing App - Search Functionality,P2,Engineering,Use Existing modal is open with many apps,"1. Open Use Existing Application modal
+2. Use search/filter field in the table
+3. Type app name or number","Table filters to show only matching apps. Search clears to restore full list."

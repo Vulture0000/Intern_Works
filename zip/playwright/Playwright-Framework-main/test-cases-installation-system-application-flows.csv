@@ -1,0 +1,88 @@
+Test ID,Feature,Priority,Role Fixture,Precondition,Test Steps,Expected Result
+TC-INST-APP-01,Setup New Application - Modal UI,P1,web-engineer-auth.fixture,User is on installation-system page with no application selected,"1. Click ""Setup New Application"" button under Option B
+2. Observe the modal that opens","Modal with heading ""New application"" opens. Modal contains: app-name field (required), app-number field, app-oem field, app-program field, app-volume number input, app-batch-size number input, app-material field. Modal contains buttons: Add fastener, Cancel, Save. Modal has × close button."
+TC-INST-APP-02,Setup New Application - Save with name only (required),P1,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill ""app-name"" with ""Test App Auto""
+3. Click ""Save""","Modal closes. Application appears in Applications section with name ""Test App Auto"". Option B shows ""Selected: Test App Auto"" with ""Reset application"" button. ""No application selected."" text is gone."
+TC-INST-APP-03,Setup New Application - Save with all fields,P1,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill all fields: name=""Full Test App"", app-no=""FULL-001"", OEM=""BMW"", program=""X-Series"", volume=""200000"", batch-size=""1000"", material=""Aluminum EN AW-6082 T6""
+3. Click ""Save""","Modal closes. Application appears with name ""Full Test App"". App card shows ""App No.: FULL-001 · 200,000 pcs/year"". Portfolio totals show Total annual volume = 200,000 and Parts/year = 200,000."
+TC-INST-APP-04,Setup New Application - Required field validation,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Leave ""app-name"" empty
+3. Click ""Save""","Save is prevented. Either error message shown for required field, or modal remains open. Application is NOT created."
+TC-INST-APP-05,Setup New Application - Negative volume validation,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Valid Name"", volume=""-100""
+3. Click ""Save""","Negative volume is rejected. Either input validation prevents entry, or error message is shown. Application is NOT created with invalid data."
+TC-INST-APP-06,Setup New Application - Zero batch size,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Zero Batch"", batch-size=""0""
+3. Click ""Save""","Zero batch size is either accepted (saves successfully) or rejected with validation error. Test documents the behavior."
+TC-INST-APP-07,Setup New Application - Cancel closes modal,P1,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill some fields (e.g., name=""Cancel Test"")
+3. Click ""Cancel""","Modal closes. No application is created. ""No application selected."" is still visible. Option B buttons remain as ""Setup New Application"" and ""Use Existing Application""."
+TC-INST-APP-08,Setup New Application - × close button,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill some fields
+3. Click the ""×"" close button","Modal closes. No application is created. Page returns to previous state with no application selected."
+TC-INST-APP-09,Setup New Application - Add single fastener,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""With Fastener""
+3. In fastener section, set brand (e.g., select from react-select), enter type=""SS"", qty A=""4"", qty B=""2""
+4. Click ""Add fastener""
+5. Click ""Save""","Modal closes. Application ""With Fastener"" is created with fastener details. Fastener information appears in the app card or in the edit form when reopened."
+TC-INST-APP-10,Setup New Application - Add multiple fasteners,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Multi Fastener App""
+3. Add first fastener (brand=X, type=SS, qtyA=4, qtyB=2)
+4. Click ""Add fastener"" again
+5. Add second fastener (brand=Y, type=CLS, qtyA=6, qtyB=3)
+6. Click ""Save""","Application is created with 2 fasteners. Both fastener entries are saved and visible when editing."
+TC-INST-APP-11,Setup New Application - After save auto-sets filters,P1,web-engineer-auth.fixture,User is on installation-system page,"1. Record initial matching product count
+2. Click ""Setup New Application""
+3. Fill name=""Filter Test App"", element type PEM implied via app definition
+4. Click ""Save""","Option B shows ""Selected: Filter Test App"". Element types filter chip updates to ""Auto from app: PEM"". Matching product count changes to show only PEM-compatible solutions. ""Reset application"" button appears."
+TC-INST-APP-12,Setup New Application - After save portfolio updates,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application""
+2. Fill name=""Portfolio App"", volume=""150000"", batch-size=""500""
+3. Click ""Save""","Portfolio totals show: Total annual volume = 150,000. Parts/year = 150,000. Derived inputs show ""—"" for fastener-dependent fields (if no fasteners added)."
+TC-INST-APP-13,Setup New Application - Edit existing application,P1,web-engineer-auth.fixture,User has an application saved (""Edit Test App"" with volume=50000),"1. Click ""Edit"" button on the app card
+2. Verify form opens with pre-filled values
+3. Change name to ""Updated Edit App"" and volume to ""75000""
+4. Click ""Save""","Edit modal opens with all fields pre-populated. After save, app card updates to show ""Updated Edit App"". Volume shows 75,000 pcs/year. App is still selected (no reset)."
+TC-INST-APP-14,Setup New Application - Cancel edit preserves original values,P2,web-engineer-auth.fixture,User has an application saved,"1. Click ""Edit"" on the app card
+2. Change some fields
+3. Click ""Cancel""","Edit modal closes. Original application values are unchanged. App card still shows original name and values."
+TC-INST-APP-15,Setup New Application - Remove application,P1,web-engineer-auth.fixture,User has an application saved,"1. Click ""Remove"" button on the app card
+2. Observe page state","Application is removed from Applications section. ""No application selected."" returns. Option B buttons return to ""Setup New Application"" and ""Use Existing Application"". Filter chips return to default (no auto-filtering). Portfolio totals reset to ""—""."
+TC-INST-APP-16,Setup New Application - Reset application,P2,web-engineer-auth.fixture,User has an application saved and filters auto-set,"1. Click ""Reset application"" button under Option B
+2. Observe page state","Filters reset. ""No application selected."" returns. Option B shows original buttons. Application card still appears in Applications section (app is not deleted, just deselected/reset)."
+TC-INST-APP-17,Use Existing Application - Modal UI,P1,web-engineer-auth.fixture,User is on installation-system page with at least one application in the system,"1. Click ""Use Existing Application"" button under Option B
+2. Observe the modal","Modal with heading ""My applications"" opens. Modal contains a table with columns: Select, Name, App No., OEM, Program, Company, Owner, Actions. Buttons visible: Select all, New application, Refresh, Edit, Delete, Close, OK. Table shows existing applications (if any)."
+TC-INST-APP-18,Use Existing Application - Select app and load,P1,web-engineer-auth.fixture,User has at least one saved application in the system,"1. Click ""Use Existing Application""
+2. Check the checkbox of an application in the table
+3. Click ""OK""","Modal closes. Selected application is loaded into Applications section. App card shows the selected app's name and details. Option B shows ""Selected: {app name}"". Portfolio totals and filters auto-update based on app."
+TC-INST-APP-19,Use Existing Application - Select all,P2,web-engineer-auth.fixture,User has multiple saved applications,"1. Click ""Use Existing Application""
+2. Click ""Select all"" button
+3. Observe checkboxes
+4. Click ""OK""","All rows become checked. After clicking OK, multiple applications load into the Applications section. Multiple app cards appear in the params area."
+TC-INST-APP-20,Use Existing Application - New application from modal,P2,web-engineer-auth.fixture,User has the Use Existing modal open,"1. Click ""Use Existing Application""
+2. Click ""New application"" button from within the modal","Modal switches to the Setup New Application form (or a new modal opens). User can create a new application from this entry point. Same fields as Setup New Application appear."
+TC-INST-APP-21,Use Existing Application - Delete from modal,P2,web-engineer-auth.fixture,User has the Use Existing modal open with at least one app,"1. Click ""Use Existing Application""
+2. Click ""Delete"" button in a row's Actions column
+3. Confirm deletion","The application is deleted from the system. It no longer appears in the table. If it was previously loaded in the params section, it may be removed from there as well."
+TC-INST-APP-22,Use Existing Application - Edit from modal,P2,web-engineer-auth.fixture,User has the Use Existing modal open with at least one app,"1. Click ""Use Existing Application""
+2. Click ""Edit"" button in a row's Actions column
+3. Modify fields in the edit form
+4. Click ""Save""","Edit modal opens with pre-filled values. After save, the table row updates to show modified values. Changes are persisted."
+TC-INST-APP-23,Use Existing Application - Refresh list,P2,web-engineer-auth.fixture,User has the Use Existing modal open,"1. Click ""Use Existing Application""
+2. Click ""Refresh"" button","The application list refreshes. Any newly created applications (e.g., by another user) appear in the table."
+TC-INST-APP-24,Use Existing Application - Close modal without selecting,P1,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Use Existing Application""
+2. Click ""Close"" button (or × close button)","Modal closes. No application is selected. Page returns to previous state with no application selected."
+TC-INST-APP-25,Use Existing Application - Add existing from params section,P2,web-engineer-auth.fixture,User is on installation-system page with no application,"1. Click ""Add existing application"" under Applications section
+2. Observe modal","Same ""My applications"" modal opens (identical to Use Existing Application). User can select and load existing apps from the params section directly."
+TC-INST-APP-26,Add new application from params section,P1,web-engineer-auth.fixture,User is on installation-system page with no application,"1. Click ""Add new application"" under Applications section (not Option B)
+2. Observe the UI","Same ""New application"" form opens (identical to Setup New Application). All fields and buttons are identical. Filling and saving creates a new app."
+TC-INST-APP-27,Multiple applications - add two apps,P2,web-engineer-auth.fixture,User has one application saved,"1. Click ""Add new application"" 
+2. Fill name=""App Two"", volume=""50000""
+3. Click ""Save""
+4. Observe Applications section","Both applications appear in Applications section as separate app cards. Applications heading shows count e.g., ""Applications (2)"". Portfolio totals combine both (e.g., total volume sums)."
+TC-INST-APP-28,Multiple applications - remove one app,P2,web-engineer-auth.fixture,User has two applications loaded,"1. Click ""Remove"" on one of the app cards
+2. Observe Applications section","One app is removed. The other app remains. Portfolio totals recalculate to reflect only the remaining app. Applications count decreases."
+TC-INST-APP-29,Clear selection button,P2,web-engineer-auth.fixture,User has one or more applications loaded,"1. Click ""Clear selection"" button","All applications are cleared from the Applications section. ""No applications yet."" empty state returns. Portfolio totals reset to ""—"". Filters reset to defaults."
+TC-INST-APP-30,Customize assumptions button,P2,web-engineer-auth.fixture,User has at least one application loaded,"1. Click ""Customize assumptions"" button
+2. Observe the modal/dialog","A modal or panel opens for customizing assumptions (e.g., utilization rate, cost factors). Buttons for saving/canceling assumptions are available."

@@ -1,0 +1,39 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# JavaScript dependencies and build output
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+
+# Generated test and coverage output
+playwright-report/
+test-results/
+reports/
+coverage/
+htmlcov/
+.coverage*
+
+# Local IDE and operating-system files
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+credentials.json
+client_secret*.json
+token.json
+*.pem
+*.pfx

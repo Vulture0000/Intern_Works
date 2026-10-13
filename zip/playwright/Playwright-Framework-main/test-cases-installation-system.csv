@@ -1,0 +1,32 @@
+Test ID,Feature,Priority,Role Fixture,Precondition,Test Steps,Expected Result
+TC-INST-01,Authentication,P1,base.fixture,User is not logged in and browser is at fresh state,"1. Navigate to /installation-system","User is redirected to /login page with Sign in heading visible"
+TC-INST-02,Page Load,P1,web-engineer-auth.fixture,User is logged in as Engineering,"1. Navigate to /installation-system
+2. Wait for page to load","URL is /installation-system. H3 ""Filter functions"" and ""Select solutions you want to compare"" are visible"
+TC-INST-03,Filter Defaults,P1,web-engineer-auth.fixture,User is on installation-system page,"1. Observe filter chips below matching products count","Filter chips show: Region: NA, Element types: none selected, Max thread: Any, Force: Any, Compare selected: 0"
+TC-INST-04,Element Type - PEM,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""PEM"" button under Fastener element type(s)
+2. Observe filter chips and matching count","PEM button becomes active/highlighted. Matching product count updates. Filter chip shows ""Element types: PEM"""
+TC-INST-05,Element Type - Multiple,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""PEM"" button
+2. Click ""SHEREX"" button
+3. Observe matching count","Both PEM and SHEREX are active. Count reflects combined results. Chips show both types"
+TC-INST-06,Capability - Process Monitoring,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Check ""Process monitoring required"" checkbox","Checkbox is checked. Matching product count filters to only machines with process monitoring feature"
+TC-INST-07,Capability - Robot Integration,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Check ""Robot integration required"" checkbox","Checkbox is checked. Matching product count filters to only machines with robot integration capability"
+TC-INST-08,Force Range Min,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Change Minimum (kN) input from 21 to 50","Force range updates. Matching product count changes. Force filter chip updates"
+TC-INST-09,Reset Filters,P2,web-engineer-auth.fixture,User has applied filters (element type + capability + force),"1. Click ""Reset filters"" button","All filters return to defaults: no element selected, capabilities unchecked, force range 21-300. Count returns to original"
+TC-INST-10,Select One Solution Per Category,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Check ""A210"" (Handtools - Pneumo Hydraulic)
+2. Check ""824 eDrive"" (Standalone Machines - Servo-Electric)
+3. Check ""A240-CP"" (Robotic Integration - Robotic Stations)
+4. Check ""MDS A100"" (InDie)
+5. Check ""Full Custom Solution"" (Custom)","All 5 checkboxes are checked. Filter chip shows ""Compare selected: 5"""
+TC-INST-11,Compare Selected Count,P2,web-engineer-auth.fixture,User is on installation-system page,"1. Check any 3 solutions from different categories","Filter chip shows ""Compare selected: 3"". Count matches number of checked boxes"
+TC-INST-12,Deselect Solution,P2,web-engineer-auth.fixture,User has 1 solution selected,"1. Uncheck the selected solution","Compare selected count returns to 0. Comparison list shows empty state again"
+TC-INST-13,Comparison Empty State,P3,web-engineer-auth.fixture,User is on installation-system page with no solutions selected,"1. Scroll to Comparison list section","Empty state message displayed: ""No solutions selected yet. Check solutions above to compare them here."""
+TC-INST-14,Setup New Application Button,P3,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Setup New Application"" button under Option B","Modal or form opens for creating a new application. Alternatively if no modal, verify button is clickable and navigates"
+TC-INST-15,Use Existing Application Button,P3,web-engineer-auth.fixture,User is on installation-system page,"1. Click ""Use Existing Application"" button under Option B","Existing application selection UI appears. Verify button is clickable"
+TC-INST-16,Add New Application (Params Section),P3,web-engineer-auth.fixture,User is on installation-system page,"1. Scroll to ""Enter your application parameters"" section
+2. Click ""Add new application"" button","New application form/modal opens for defining part and fastener parameters"
+TC-INST-17,Portfolio Totals Empty State,P3,web-engineer-auth.fixture,User has no applications defined,"1. Scroll to Portfolio totals in application parameters section","All KPI values show ""—"": Total annual volume, Total fasteners/year, Fasteners/part, Element types/part, Parts/year"
+TC-INST-18,Cross-Role Access,P2,"web-engineer-auth, web-customer-auth, web-distributor-auth, web-sales-auth fixtures",Each role-based user is logged in,"1. For each role: navigate to /installation-system
+2. Verify page loads","All 4 roles can successfully access the page. URL is /installation-system. Solution grid is visible"
+TC-INST-19,User Menu,P3,web-engineer-auth.fixture,User is logged in as Engineering,"1. Observe user menu button in header","User menu shows avatar ""DW"", name ""David Wilson"", role ""Engineering"". Menu is clickable"
+TC-INST-20,Request Support Button,P3,web-engineer-auth.fixture,User is on installation-system page,"1. Scroll to bottom of page
+2. Observe floating support button","""Request Support"" button is visible at bottom-left. Button becomes visible on scroll"

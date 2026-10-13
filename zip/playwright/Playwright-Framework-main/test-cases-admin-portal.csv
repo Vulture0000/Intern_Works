@@ -1,0 +1,147 @@
+Test ID,Section,Priority,Role,Precondition,Test Steps,Expected Result
+TC-ADM-001,Admin Login - Happy Path,P0,Admin,User navigates to admin portal login page,"1. Navigate to https://admin.configurator.dev.pemnet.ai/login
+2. Enter email: admin@penn.com
+3. Click ""Sign in with a password instead"" button
+4. Enter password: 12345678
+5. Click ""Sign In"" button","User is redirected to /users dashboard. Heading ""All Users"" is visible. User menu shows John Smith. Sidebar navigation is present."
+TC-ADM-002,Admin Login - Invalid Email,P1,None,User is on admin login page,"1. Navigate to /login
+2. Enter email: nonexistent@domain.com
+3. Click ""Sign in with a password instead"", enter any password
+4. Click ""Sign In""","User stays on /login page. Generic error: ""Sign-in could not be completed"". Error does NOT reveal whether email exists."
+TC-ADM-003,Admin Login - Invalid Password,P1,None,User is on admin login page,"1. Navigate to /login
+2. Enter admin@penn.com, Click password instead, enter wrong password
+3. Click ""Sign In""","User stays on /login. Generic error. No indication of which field is wrong."
+TC-ADM-004,Admin Login - Empty Fields,P2,None,User is on admin login page,"1. Click Sign In without entering email","Validation error OR page stays on /login. No redirect."
+TC-ADM-005,Admin Login - Empty Password,P2,None,User fills email but not password,"1. Enter admin@penn.com, click password instead
+2. Click Sign In without password","Validation prevents submission. Stays on /login."
+TC-ADM-006,Admin Login - Case-Insensitive Email,P1,Admin,User is on admin login page,"1. Enter ADMIN@PENN.COM, password: 12345678
+2. Click Sign In","Redirect to /users. Email case-insensitive."
+TC-ADM-007,Admin Login - Password Field Masking,P3,None,User is on login page,"1. Fill password field","Characters masked as bullets/dots. Not plain text."
+TC-ADM-008,Admin Session - Protected Route Without Auth,P0,None,Not logged in,"1. Navigate directly to /users, /roles, /applications, etc.","Redirected to /login. Cannot access protected content."
+TC-ADM-009,Admin Session - Expired Session,P1,Admin,Logged in as admin,"1. Clear cookies, localStorage, sessionStorage
+2. Navigate to /users","Redirected to /login. Must re-authenticate."
+TC-ADM-010,Admin Logout - Via User Menu,P0,Admin,Logged in on dashboard,"1. Click user menu button (John Smith)
+2. Click Sign Out
+3. Wait for redirect","Redirected to /login. Sign In heading visible."
+TC-ADM-011,Admin Logout - Session Cleared After Logout,P1,Admin,Just logged out,"1. Complete logout
+2. Navigate directly to /users","Redirected to /login. Session terminated."
+TC-ADM-012,Admin Dashboard - User Menu Info,P2,Admin,Logged in,"1. Observe user menu in top-right","Menu shows ""John Smith"". Click opens dropdown with Sign Out."
+TC-ADM-013,Admin Dashboard - Page Refresh Preserves Session,P1,Admin,On /users logged in,"1. Refresh browser (F5/Cmd+R)","User remains logged in. Dashboard content displayed."
+TC-ADM-014,Admin Dashboard - Sidebar Navigation Complete,P0,Admin,Logged in as admin,"1. Observe all sidebar items","Sidebar shows groups: Dashboard, Analytics, Users, Roles, Applications, Tasks, Changelog, Machine (expandable), Products, Fasteners (expandable), Tooling (expandable), Pricing (expandable), Calculations (expandable), Content (expandable), SMTP, Profile. Each navigates to correct route."
+TC-ADM-015,Admin Sidebar - Navigate All Routes Accessibility,P1,Admin,Logged in as admin,"1. Click each sidebar nav item: Dashboard, Analytics, Users, Roles, Applications, Tasks, Changelog
+2. Verify each page loads with correct h1","Dashboard→All Users, Analytics→Analytics, Users→All Users, Roles→Roles Management, Applications→Applications, Tasks→Tasks, Changelog→Change Log. No 403 errors."
+TC-ADM-016,Admin Sidebar - Machine Group Routes,P1,Admin,Logged in as admin,"1. Expand Machine group and navigate:
+2. Machine Options → /datasets/machine-options
+3. Machine Options US → /datasets/machine-options-us
+4. CAD 3D Settings → /datasets/cad-3d-settings","Each route loads with correct heading. Machine Options table shows columns: Part No, Description, Category, Sub-category, Price, Available On, Actions. Add record button present."
+TC-ADM-017,Admin Sidebar - Products Route,P1,Admin,Logged in as admin,"1. Navigate to /datasets/products
+2. Observe page","Heading: Dataset: Products. Table shows columns: ID, Row, Category, Subcategory, Name, Link, Actions. Add record button present."
+TC-ADM-018,Admin Sidebar - Fasteners Group Routes,P1,Admin,Logged in as admin,"1. Expand Fasteners group and navigate each:
+2. Fasteners → /datasets/fasteners
+3. Profil Fasteners → /datasets/profil-fasteners
+4. Autoriv Fasteners → /datasets/autoriv-fasteners
+5. Sherex Fasteners → /datasets/sherex-fasteners
+6. Profil Indie Options → /datasets/profil-indie-options","Each route loads. Fasteners shows Part No, Min Sheet Thickness, Actions columns. Brand-specific fastener datasets show their respective data."
+TC-ADM-019,Admin Sidebar - Tooling Group Routes,P1,Admin,Logged in as admin,"1. Expand Tooling group and navigate:
+2. Fastener -> Tooling Mapping → /datasets/fastener-tooling-mapping
+3. Tooling Sets → /datasets/tooling-sets","Each route loads with table data. Add record button present."
+TC-ADM-020,Admin Sidebar - Pricing Group Routes,P1,Admin,Logged in as admin,"1. Expand Pricing group and navigate:
+2. Pemserter Price EUR → /datasets/pemserter-eur
+3. Pemserter Price USD → /datasets/pemserter-usd
+4. Cost Models → /datasets/cost-models","Each route loads. Price lists show EUR/USD pricing data. Cost Models shows modelId, label, priceRuleSource columns."
+TC-ADM-021,Admin Sidebar - Calculations Group Routes,P1,Admin,Logged in as admin,"1. Expand Calculations group and navigate:
+2. Calculation Parameters → /datasets/calculation-parameters
+3. Cost Model Tools → /datasets/cost-model-tools
+4. Responsibility Map → /datasets/responsibility-map
+5. Manual Quote Items → /datasets/manual-quote-items","Each route loads with respective table data. Calculation Parameters and Cost Model tools show configuration data."
+TC-ADM-022,Admin Sidebar - Content Group Routes,P1,Admin,Logged in as admin,"1. Expand Content group:
+2. Landing Content → /datasets/landing-content","Dataset: Landing Content page loads with content management table."
+TC-ADM-023,Admin Sidebar - SMTP Settings,P1,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Observe page","SMTP configuration page loads. Shows SMTP server settings form."
+TC-ADM-024,Admin Sidebar - Profile Settings,P1,Admin,Logged in as admin,"1. Navigate to /settings/profile
+2. Observe page","Profile Overview page loads. Shows user's profile information."
+TC-ADM-025,Admin Changelog - Undo Functionality,P1,Admin,On /change-log page,"1. Navigate to /change-log
+2. Observe each row","Each changelog entry has an ""Undo"" button. Entries show date, user, action, description sorted newest first."
+TC-ADM-026,Admin Datasets - CRUD Add Record,P1,Admin,On any dataset page,"1. Click ""Add record"" button on any dataset
+2. Fill required fields in the form/modal
+3. Submit","New record created. Success message appears. New record appears in table. Pagination updates."
+TC-ADM-027,Admin Datasets - CRUD Edit Record,P1,Admin,On dataset page with records,"1. Click Edit/Actions button on a record
+2. Modify one field
+3. Save","Record updated. Changes reflected in table."
+TC-ADM-028,Admin Datasets - CRUD Delete Record,P1,Admin,On dataset page with records,"1. Click Delete on a record
+2. Confirm deletion","Record removed. Row disappears from table. Confirmation message shown."
+TC-ADM-029,Admin Datasets - Table Pagination,P2,Admin,On dataset page with many records,"1. Scroll to bottom of table
+2. Click Prev/Next navigation","Table pages correctly. Previous/Next buttons enabled/disabled appropriately."
+TC-ADM-030,Admin Datasets - Search/Filter,P2,Admin,On any dataset page,"1. Use search/filter input if present
+2. Type a query
+3. Observe filtered results","Results filter in real-time or on submission. Matching records only."
+TC-ADM-031,Admin Users - User List Table,P1,Admin,On /users page,"1. Observe the users table","Table shows user records with columns: Name, Email, Role, Status, Last Active. Pagination present."
+TC-ADM-032,Admin Roles - Add Role Button,P2,Admin,On /roles page,"1. Observe ""Add Role"" button
+2. Click to open role creation form","Add Role button visible. Form/modal opens to create new role with name and permissions."
+TC-ADM-033,Admin Applications - Application List,P1,Admin,On /applications page,"1. Observe the applications table","Applications list shows columns for app data. Pagination and filtering available."
+TC-ADM-034,Admin Tasks - Task List,P1,Admin,On /tasks page,"1. Observe the tasks table","Task list shows task entries with status, assignment info. Pagination present."
+TC-ADM-035,Admin Analytics - Dashboard Metrics,P2,Admin,On /analytics page,"1. Observe the analytics dashboard","Analytics shows metrics/charts. Data visualization elements present."
+TC-ADM-036,Admin Responsive - Sidebar Collapse,P3,Admin,Logged in on desktop,"1. Resize browser to 768px width
+2. Observe sidebar behavior","Sidebar collapses to hamburger/icon-only mode. Content remains readable. Navigation still accessible."
+TC-ADM-037,Admin Machine Options US - Different Data Than Machine Options,P2,Admin,On /datasets/machine-options and /datasets/machine-options-us,"1. Navigate to /datasets/machine-options
+2. Note data
+3. Navigate to /datasets/machine-options-us
+4. Compare","Machine Options (US) shows different/regional data compared to standard Machine Options. USD pricing vs EUR."
+TC-ADM-038,Admin Tables - Row Action Buttons (Edit/Delete),P1,Admin,On any dataset page with records,"1. Observe Actions column on any table row","Actions column shows Edit and Delete buttons/links per row. Buttons are clickable."
+TC-ADM-039,Admin Blocked Routes - Non-Admin Users,P1,Sales,Logged in as sales on admin portal,"1. As sales@penn.com, try navigating to /roles, /change-log, /analytics, /datasets/*","Sales user gets 403 or redirect on admin-only routes."
+TC-ADM-040,Admin Blocked Routes - Customer Users,P1,Customer,Logged in as customer on admin portal,"1. As customer@penn.com, try /datasets/cost-models
+2. Also try /roles, /change-log","Customer redirected to /login or 403 for admin-only routes."
+TC-ADM-041,Admin Approvals Page,P1,Admin,Logged in as admin,"1. Navigate to /approvals
+2. Observe page","Heading: ""Approvals"". Page loads with sidebar. Content area shows approval-related data."
+TC-ADM-042,Admin Dashboard Overview Page,P1,Admin,Logged in as admin,"1. Navigate to /dashboard/overview
+2. Observe page","Heading: ""Dashboard Overview"". Shows KPI metrics: Total Users (12,482), Active Users (8,941), Total Applications (4,210), Pending (158), Approved (3,842), Rejected (210). Each metric shows percentage change (+12%, +5%, etc.)."
+TC-ADM-043,Admin Dashboard Reports Page,P1,Admin,Logged in as admin,"1. Navigate to /dashboard/reports
+2. Observe page","Breadcrumb shows: Admin / Dashboard / Reports. Page loads with report-related content."
+TC-ADM-044,Admin Profile Page (Top-Level),P2,Admin,Logged in as admin,"1. Navigate to /profile
+2. Observe page","Heading: ""Profile Overview"". Shows admin user profile info. ""Edit Profile"" button visible."
+TC-ADM-045,Admin Settings - General,P1,Admin,Logged in as admin,"1. Navigate to /settings/general
+2. Observe page","Breadcrumb: Admin / Settings / General. General application settings form visible."
+TC-ADM-046,Admin Settings - Permissions,P1,Admin,Logged in as admin,"1. Navigate to /settings/permissions
+2. Observe page","Permissions settings page loads. Permission management UI visible."
+TC-ADM-047,Admin Settings - Security,P1,Admin,Logged in as admin,"1. Navigate to /settings/security
+2. Observe page","Security settings page loads. Password/authentication settings visible."
+TC-ADM-048,Admin Datasets - Tasks Raw,P2,Admin,Logged in as admin,"1. Navigate to /datasets/tasks-raw
+2. Observe page","Raw tasks dataset loads with table of task data. Similar to other dataset pages."
+TC-ADM-049,Admin Dashboard - KPI Metrics Accuracy,P2,Admin,Logged in as admin,"1. Navigate to /dashboard/overview
+2. Observe each KPI card
+3. Verify metric labels and values","KPIs display: Total Users (count with % change), Active Users, Total Applications, Pending, Approved, Rejected. Data appears current and realistic."
+TC-ADM-050,Admin Dashboard - No Other User Can Access Overview,P1,Sales,Logged in as sales,"1. Login as sales@penn.com
+2. Navigate to /dashboard/overview","Sales user is redirected or receives 403. Dashboard overview is admin-only."
+TC-ADM-051,Admin Settings - All Settings Tabs Navigation,P2,Admin,Logged in as admin,"1. Navigate to /settings/profile
+2. Verify links/tabs to General, Permissions, Security settings
+3. Click each tab","User can navigate between all settings sections: Profile, General, Permissions, Security. Each loads correctly."
+TC-ADM-052,Admin Register Page - 404,P3,None,Not logged in or logged in,"1. Navigate to /register (admin portal)
+2. Observe page","Page returns 404 ""Page not found"". Registration is not implemented on admin portal. ""Back to Home"" link visible."
+TC-EMAIL-01,Admin Email - SMTP Page Loads,P0,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Observe page elements","SMTP heading visible. From Email, From Name, Reload, Send Test, Save buttons visible."
+TC-EMAIL-02,Admin Email - SMTP Enabled Toggle,P1,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Observe enabled toggle","Toggle/checkbox reflects whether task notification emails are currently enabled."
+TC-EMAIL-03,Admin Email - Update From Email and Name,P1,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Modify From Email and From Name
+3. Click Save
+4. Reload page","Changes saved and persist after page reload."
+TC-EMAIL-04,Admin Email - Send Test Button,P1,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Enter valid test recipient email
+3. Click Send Test","Send Test action completes without error."
+TC-EMAIL-05,Admin Email - Reload Refreshes Config,P1,Admin,Logged in as admin,"1. Navigate to /smtp
+2. Click Reload","Page reloads with current SMTP configuration."
+TC-EMAIL-06,Admin Email - Responsibility Map Drives RFQ,P1,Admin,Logged in as admin,"1. Navigate to /datasets/responsibility-map
+2. Check first product/region mapping","Sales emails and Engineering emails configured for each product/region combination."
+TC-EMAIL-07,Admin Email - RFQ Triggers Email to Sales,P1,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Select A210 solution
+3. Open configuration panel
+4. Verify Request Quotation button","RFQ submission UI available. Request Quotation / Support button is visible."
+TC-EMAIL-08,Admin Email - RFQ Shows Confirmation,P1,Customer,Logged in as customer on testweb,"1. Navigate to installation system
+2. Select A210, open config panel
+3. Click Request Quotation / Support","Confirmation message displayed to customer that request has been submitted."
+TC-EMAIL-09,Admin Email - Task Created After RFQ,P1,Customer + Admin,"Submit RFQ as customer, then log in as admin","1. Login as customer, open config, click Request Quotation
+2. Login as admin
+3. Navigate to /tasks","Tasks page accessible. Task list loads correctly."
+TC-EMAIL-10,Admin Email - Notification Includes RFQ Details,P2,Admin,"(Manual) Configure SMTP, submit RFQ as customer","1. Configure SMTP with test recipient
+2. Submit RFQ as customer
+3. Check test recipient inbox","Email includes RFQ snapshot, configured machine options, application details."
